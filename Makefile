@@ -1,12 +1,13 @@
-ifndef PUREC_DIR
-$(error "PUREC_DIR is not defined")
-endif
-
 default: main
 .PHONY: default
 
+CFLAGS = -g3 -O0
+
 include $(PUREC_DIR)/mk/target.mk
 
-SHELL := /bin/bash
-srcs := src test
-$(eval $(call purs_mk_target,main,Test.Main,$(srcs),$(deps)))
+main: .spago
+
+$(eval $(call purs_mk_target,main,Test.Main,src test))
+
+main_leakcheck: main
+check: main_leakcheck

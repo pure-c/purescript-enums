@@ -270,7 +270,7 @@ defaultPred toEnum' fromEnum' a = toEnum' (fromEnum' a - 1)
 defaultCardinality :: forall a. Bounded a => Enum a => Cardinality a
 defaultCardinality = Cardinality $ defaultCardinality' 1 (bottom :: a)
   where
-    defaultCardinality' i = maybe i (defaultCardinality' (i + 1)) <<< succ
+    defaultCardinality' i x = maybe i (defaultCardinality' (i + 1)) (succ x)
 
 -- | Provides a default implementation for `toEnum`.
 -- |
